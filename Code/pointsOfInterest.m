@@ -1,7 +1,7 @@
 function [rows, cols] = pointsOfInterest(img, threshold)
     rows = -ones(1,1);
     cols = -ones(1,1);
-    ind = 0;
+    ind = 1;
     for row=2:(size(img,1)-1)
         for col=2:(size(img,2)-1)
             s = interestScore(img, row, col);

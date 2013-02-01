@@ -9,6 +9,10 @@ function spiralIterator(mtx, start, func)
     
     x = 0;
     y = 0;
+    
+    % Since the spiral algorithm assumes that the iteration
+    % starts in the middle, the 2*R and 2*C accounts for
+    % the maximum distance from the center. 
     for i=1:max(2*R, 2*C)^2
         if (r + x > 0 && r + x <= R) && (c + y > 0 && c + y <= C)
             % Valid point!

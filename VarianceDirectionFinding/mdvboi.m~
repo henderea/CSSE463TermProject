@@ -1,0 +1,11 @@
+function boxes = mdvboi(im, pxCount)
+    im = mdv(im, pxCount);
+    labels = bwlabel(im);
+    
+    boxes = zeros(max(max(labels)), 4);
+    for i = 1:max(max(labels))
+        region = (labels == i);
+        regionprops(region, 'BoundingBox');
+        boxes(i,:) = 
+    end
+end

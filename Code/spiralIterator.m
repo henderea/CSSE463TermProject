@@ -16,7 +16,7 @@ function spiralIterator(mtx, start, func)
     for i=1:max(2*R, 2*C)^2
         if (r + x > 0 && r + x <= R) && (c + y > 0 && c + y <= C)
             % Valid point!
-            if (func(mtx, r + x, c + y) == -1)
+            if (func(r + x, c + y) == -1)
                 break;
             end
         end

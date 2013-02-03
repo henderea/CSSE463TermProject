@@ -1,4 +1,4 @@
-function spiralIterator(mtx, start, func)
+function [rr rc] = spiralIterator(mtx, start, func)
     r = start(1);
     c = start(2);
     R = size(mtx, 1);
@@ -17,6 +17,8 @@ function spiralIterator(mtx, start, func)
         if (r + x > 0 && r + x <= R) && (c + y > 0 && c + y <= C)
             % Valid point!
             if (func(r + x, c + y) == -1)
+                rr = r + x;
+                rc = c + y;
                 break;
             end
         end

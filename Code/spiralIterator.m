@@ -4,6 +4,9 @@ function [rr rc] = spiralIterator(mtx, start, func)
     R = size(mtx, 1);
     C = size(mtx, 2); 
     
+    rr = -1;
+    rc = -1;
+    
     dx = 0;
     dy = -1;
     

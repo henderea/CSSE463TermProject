@@ -1,5 +1,6 @@
-function matches = findUnidirectionalMatches(A, B, matchSigma, numPx, matchThreshold) 
-    boxes = mdvboi(A, numPx);
+function matches = findUnidirectionalMatches(A, B, matchSigma, numPx, matchThreshold)
+    grayA = rgb2gray(A);
+    boxes = mdvboi(grayA, numPx);
     size(boxes)
     for i=1:size(boxes,1)
         boxCenter = uint16(boxes(i, 1:2) + (boxes(i, 3:4) / 2));

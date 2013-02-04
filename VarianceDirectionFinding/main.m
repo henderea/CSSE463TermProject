@@ -1,14 +1,16 @@
 function main
     im = getCat();
-    [r,c] = mdvpoi(im, 10)
-    boxes = mdvboi(im, 10);
+    imtool(mdv(im, 20));
+    [r,c] = mdvpoi(im, 15)
+    boxes = mdvboi(im, 15);
+    size(boxes)
     
     imshow(im);
     hold on;
-    plot(r, c, 'b*');
     for i = 1:size(boxes,1)
         rectangle('position', boxes(i,:), 'EdgeColor', 'r', 'FaceColor', 'r');
     end
+    plot(c, r, 'b*');
     hold off;
 end
 

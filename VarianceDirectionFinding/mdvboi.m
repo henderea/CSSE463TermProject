@@ -1,6 +1,6 @@
 function boxes = mdvboi(im, pxCount)
     im = mdv(im, pxCount);
-    im= imdilate(im, strel('disk',3,4));
+    im = imdilate(im, strel('disk',3,4));
     labels = bwlabel(im);
     
     boxes = zeros(max(max(labels)), 4);

@@ -1,10 +1,11 @@
 function fn = getThresholdedIteratorAdapter(inFn, threshold)
     fn = @innerAdapter;
-    function ret = innerAdapter(r, c)
-        if inFn(r,c) < threshold
-            ret = -1;
+    function retAdapt = innerAdapter(r, c)
+        resCmp = inFn(r,c)
+        if resCmp > threshold
+            retAdapt = -1
         else
-            ret = 1;
+            retAdapt = 1;
         end
     end
 end

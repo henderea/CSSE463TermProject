@@ -12,20 +12,20 @@ function [match_center, score] = findMatchingWindow(A, window, startPos, sigma, 
     threshold = getMatchScore(window, window, gaussianFilter) * confidence;
     
     % Now, ITERATE!
-    iter = ovalGenerator(startPos, size(A));
-    for i=1:size(iter, 1)
-        pt = iter(i,:);
-        
+    iterator = getOvalGenerator(startPos, size(A));
+    [pt, iterator] = ovalGeneratorNext(iterator);
+    while pt
         inWin = getWindow(A, pt, size(window));
         
         if (inWin)
             % Score the window
             score = getMatchScore(window, inWin, gaussianFilter);
-            if score > threshold
+            if score < threshold
                 match_center = pt;
                 break;
             end
         end
+        
+        [pt, iterator] = ovalGeneratorNext(iterator);
     end
-
 end

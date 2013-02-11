@@ -10,12 +10,12 @@ function points = findDirectionalMatches(A, B, wnSize, sigma, confidence)
 
     % Search through the corner matches and try to find them using
     % findMatchingWindow
-    for i=1:size(cornerPts, 2)
+    for i=1:size(cornerPts, 1)
         pt = cornerPts(i, :);
         window = getWindow(A, pt, wnSize);
         [match_pt, score] = findMatchingWindow(A, window, pt, sigma, confidence);
-        if (match_pt)
-            points(ptIdx, :) = [pt match_pt];
+        if (match_pt ~= -1)
+            points(ptIdx, :) = [pt match_pt]
             ptIdx = ptIdx + 1;
         end
     end

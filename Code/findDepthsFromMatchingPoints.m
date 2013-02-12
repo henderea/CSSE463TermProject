@@ -8,9 +8,10 @@
 %   column vector of the euclidian distances between
 %   source and matched points in images A and B.
 
-function distances = findDepthsFromMatchingPoints(a, b)
-	allPoints = [a; b];
-	distances = sqrt(allPoints(:,1:2) .^ 2 + delta(:,3:4) .^ 2);
+function distances = findDepthsFromMatchingPoints(allPoints)
+	%/ allPoints = [a; b];
+	distances = sqrt(double(allPoints(:,1:2) .^ 2 + allPoints(:,3:4) .^ 2));
+	distances = scale2D(distances);
 end
 
 function out = scale2D(in)

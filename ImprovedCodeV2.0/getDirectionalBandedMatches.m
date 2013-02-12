@@ -27,7 +27,7 @@ function [mA, mB, matches] = getDirectionalBandedMatches(cornA, cornB, A, B, mA,
                     winB = getWindow(B, [rB, cB], windowSize);
                     
                     % Now, check if these might be a match
-                    distanceFactor = 0.5 * sqrt((double(rA)-double(rB))^2+(double(cA)-double(cB))^2);
+                    distanceFactor = 0.9 * sqrt((double(rA)-double(rB))^2+(double(cA)-double(cB))^2);
                     score = getMatchScore(winA, winB, ones(size(winA))) * distanceFactor;
                     if score < min_value
                         min_idx = j;

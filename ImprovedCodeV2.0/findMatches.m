@@ -1,7 +1,7 @@
 function [matches] = findMatches(A, B)
     % CONFIGURATION
     winSize = [5 5];
-    maxCorners = 50;
+    maxCorners = 250;
     bandSize = 5; % px
     
     % The corner detector only works in grayscale space

@@ -15,53 +15,12 @@ function [matches] = findMatches(A, B)
     cA = step(cornerDetector, gA);
     cB = step(cornerDetector, gB);
     
-    % Indices already correlated 
-    iA = zeros(size(cA, 1), 1);
-    iB = zeros(size(cB, 1), 1);
+    % Arrays to mark the corners already matched
+    mA = zeros(size(cA, 1), 1);
+    mB = zeros(size(cB, 1), 1);
     
-    for i=1:size(cA, 1)
-        if ~iA(i)
-            winA = getWindow(gA, cA(i, :), winSize);
-            
-            % Get a list of the candidate matches from cB
-            match1 = (cB(:, 1) > (cA(i, 1) - bandSize));
-            match2 = (cB(:, 1) < (cA(i, 1) + bandSize));
-            bMatches = find((match1 & match2) == 1);
-
-            for j=1:size(bMatches)
-                if ~iB(bMatches(j))
-                    winB = getWindow(gB, cB(bMatches(j), :), winSize);
-                    if getMatchScore(winA, winB, ones(size(winA))) < threshold
-                        iB(i) = bMatches(j);
-                        iA(bMatches(j)) = i;
-                        break;
-                    end
-                end
-            end
-        end
-    end
+    [mA, mB, matchesA] = getDirectionalBandedMatches(cA, cB, A, B, mA, mB, bandSize, winSize);
+    [mA, mB, matchesB] = getDirectionalBandedMatches(cB, cA, B, A, mB, mA, bandSize, winSize);
     
-    for i=1:size(cB, 1)
-        if ~iB(i)
-            winB = getWindow(gB, cB(i, :), winSize);
-            % Get a list of the candidate matches from cA
-            match1 = (cA(:, 1) > (cB(i, 1) - bandSize));
-            match2 = (cA(:, 1) < (cB(i, 1) + bandSize));
-            aMatches = find((match1 & match2) == 1);
-            
-            for j=1:size(aMatches)
-                if ~iA(aMatches(j))
-                    winA = getWindow(gA, cA(aMatches(j), :), winSize);
-                    if getMatchScore(winA, winB, ones(size(winA))) < threshold
-                        iA(i) = aMatches(j);
-                        iB(aMatches(j)) = i;
-                        break;
-                    end
-                end
-            end
-        end
-    end
-    
-    iB
-    iA
+    matches = [matchesA, matchesB];
 end

@@ -1,8 +1,11 @@
 function main
-    im = getCat();
-    imtool(mdv(im, 20));
-    [r,c] = mdvpoi(im, 15)
-    boxes = mdvboi(im, 15);
+    im = getScene(); % getCat();
+    im = imfilter(im, fspecial('gaussian', [5 5], 2), 'same');
+    
+    pxCount = 300;
+    imtool(mdv(im, pxCount));
+    [r,c] = mdvpoi(im, pxCount);
+    boxes = mdvboi(im, pxCount);
     size(boxes)
     
     imshow(im);
@@ -26,13 +29,10 @@ function mapToGray(mask, im)
 end
 
 function im = getCat
-	im = imread('cat.jpg');
+	im = imread('../Images/png/cat.jpg');
 	im = rgb2gray(im);
 end
 
-function im = getDiff
-    im1 = rgb2gray(imread('im5.png'));
-    im2 = rgb2gray(imread('im6.png'));
-    
-    im = (im1 - im2);
+function im = getScene
+    im = rgb2gray(imread('im5.png'));
 end

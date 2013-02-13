@@ -1,0 +1,43 @@
+\subsection{Hannah, Marsha Jo. "Digital Stereo Image Matching Techniques." International Society for Photogrammetry and Remote Sensing, July 1988.}
+
+\subsubsection{Summary}
+In this paper, Hannah presents an overview of various point matching algorithms that can be used to find corresponding pairs of points in stereographic images. 
+
+Hannah describes the algorithms in several classes, including area-based measures that match correlations in patches of the images, edge-based measures that match linear features, global optimization algorithms that can find all corresponding points simultaneously, and feature extractor-based measures that can match single points in images. Hannah primarily describes an area-based algorithm developed at SRI. This algorithm uses iterative refinement and backtracking to improve their results. 
+
+Finally, Hannah describes the performance of the SRI point matching algorithm on a set of test data provided by the ISPRS, stating that for natural scenes, the SRI algorithm performs well. However, the SRI algorithm performed rather poorly on an image of the Olympia dome, not producing any matches. Hannah explains that this is the result of the SRI algorithm being tuned for natural scenes with significant amount of variation and texture and not for the "bland faces of cultural objects."
+
+\subsubsection{Applicability}
+In our given problem, there are two main subproblems: determining corresponding points in a pair of stereo images and using depth and image information to determine 3D faces of objects. Given that these algorithms are specifically designed for point matching in stereo images, these algorithms should be reasonably suited for use in determining corresponding points. This paper provided the inspiration for our main approach to point matching in that we tried to use the patch correlation as described in the SRI algorithm.
+
+\subsubsection{Issues}
+One of the issues with using this paper for our project wase the lack of implementation-level detail in the paper. It was difficult to produce a working implementation of the SRI algorithm solely from the limited detail given in the paper. However, there are other papers where the SRI algorithm is described in more depth, such as Hannah's "Description of SRI's Baseline Stereo System," published by SRI and DARPA in October 1984. 
+
+In addition, The SRI algorithm's poor performance on surfaces that were not highly textured was a problem for our algorithm as well, especially if our depth mapping is to be applied in a consumer setting where customers would be expecting the product to work no matter the level of texture of the scene. 
+
+
+\subsection{Hannah, Marsha Jo. "Technical Note 342 - Description of SRI's Baseline Stereo System." Defense Advanced Research Projects Agency, October 1984. }
+
+\subsubsection{Summary}
+In this paper, Hannah presents an area-based point matching algorithm used by SRI as part of a system for doing 3D reconstructions from stereoscopic images. This paper provides much of the implementation detail missing in the other paper by Hannah, Digital Stereo Image Matching Techniques. 
+
+The algorithm is split into two primary steps: preliminary matching and anchored matching. The choice of preliminary matching techniques depend on whether we have the camera parameters, such as the focal length and the principal point. Since we do not want to take the time to calculate the camera parameters, the HMATCH or C2MODEL algorithms devised in the SRI algorithm would work sufficiently. 
+
+Once a set of preliminary corresponding points are selected, these points are then used as "anchors" for matching corresponding pairs of points in the near vicinity.  
+
+\subsubsection{Applicability}
+As mentioned in the previous literature review for Hannah's Digital Stereo Image Matching Techniques, the SRI algorithm provided the main inspiration for our algorithm, at least at first.  It describes using a outward spiral iteration technique, which we used as one of our approaches before attempting to just map interesting points to one another (as this paper warned against, because of the possibility that an interesting point algorithm may not find the same points in each image).
+
+\subsubsection{Issues}
+While the information in this paper resolved some of the concerns with the detail needed for implementation, the SRI algorithm ended up having problems with accuracy on scenes that are sparsely textured. 
+
+\subsection{Thompson, Clark. "Depth Perception in Stereo Computer Vision." Stanford Artificial Intelligence Laboratory, October 1975.}
+
+\subsubsection{Summary}
+This paper describes a complete process for the determination of points and depths in two stereo images, including camera setups and algorithms for the computation of matching points in the images. The paper builds on the research of several other sources, offering refinements to their techniques to provide better accuracy for point matching. It also discusses solutions to several of the problems associated with any depth perception algorithms, including how to overcome lens and perspective distortions.
+
+\subsubsection{Applicability}
+The work discussed in this paper strongly resembled expected subproblems of our project, including the identification of points and point pairs in two stereo images. This work provided a good foundation for us to start with, although we were not able to take our project further by matching faces in stereo images.
+
+\subsubsection{Issues}
+Many issues with the depth perception are listed by the author, and had not yet been solved at the time of writing. Of particular note are problems caused by repeated features in images, which can cause issues in determining proper alignment for the stereo images. In addition, the perspective of source images can create issues in properly aligning points without taking into account the distortion of one of the two images. It is also discouraging that this paper was published in 1975, as much of of the 'Future Work' listed have probably been solved by now.

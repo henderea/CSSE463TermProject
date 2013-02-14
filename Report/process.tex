@@ -8,6 +8,15 @@ In theory, one constraint on the corresponding points is that they must be in th
 To find interesting points, we tried two different algorithms: directed variance and corner detection
 
 \subsubsection{Directed Variance}
+The idea behind directed variance point finding is that easily identifiable points are those with the most variance around them. For instance, a fingerprint is much easier to track than a simple circle, where properties such as rotation cannot be readily observed. In our implementation of this algorithm, four variance maps are calculated for an image, measuring variance in a 5-pixel neighborhood along the horizontal, vertical, and diagonal axes. These four maps are then combined into one by taking the minimum of the directional variances at each pixel.
+
+On this new combined variance map, pixels with high scores represent pixels with at least that amount or more variance in all other directions, and thus signify candidate points for our point finder. To convert this map to individual points, we iteratively maximize a threshold on this variance map, until it no longer contains a predetermined minimum number of candidate points.
+
+While a sufficient implementation of the basic algorithm, the points selected at this stage are not quite satisfactory, and additional optimizations are needed. Specifically we noticed clusters of individual pixels within small neighborhoods of each other, and single pixels of noise being selected as candidate points. The former creates issues in point matching, as matching multiple points in too small a neighborhood becomes wasted effort, and the latter produces points which are actually not very ``interesting'', as they easily produce false matches.
+
+Thus we encapsulate points of interest instead as regions of interest, using a simple 8-neighborhood to cluster similar pixels, and remove noise by applying a 5-pixel gaussian blur to images before processing them in our point finder.
+
+With these two modifications, we managed to solve these two problems, however the candidate points selected by the algorithm still lacked enough of the qualities we were looking for in our points of interest. The largest issue we still faced was the point finder not finding an even enough distribution of candidate points, with it often favoring small regions of the overall image and leaving others without any points.
 
 \subsubsection{Corner Detection}
 After realizing that directed variance was not going to yield the type of interesting points that we needed, we began to look for other options for finding points that have enough unique features to them that we can accurately match them to their corresponding points in the other image. 

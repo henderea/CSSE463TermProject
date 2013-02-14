@@ -1,9 +1,9 @@
 Our process for stereoscopic depth mapping consists of two components: automatically matching corresponding points in both images and then using the distance between those points to determine relative distance from the cameras. 
 
 \subsection{Point Matching}
-To be able to use triangulation, we need pairs of matched points between the two stereoscopic images. To find these matched points, we first need to find ``interesting'' points in each of the images and then try to correspond those points to their corresponding point in the other image. 
+To be able to use triangulation, we need pairs of matched points between the two stereoscopic images. To find these matched points, we first need to find ``interesting'' points in each of the images and then try to match those points to their corresponding point in the other image. 
 
-In theory, one constraint on the corresponding points is that they must be in the same row -- however, since this is not the perfect world, we must assume that the cameras are not perfectly lined up.Therefore, we decided that a 10 pixel horizontal search band on either side of the pixel was sufficient to cover any variations in the camera positioning while still limiting the search field quite significantly. 
+In theory, one constraint on the corresponding points is that they must be in the same row -- however, since this is not the perfect world, we must assume that the cameras are not necessarily perfectly lined up.Therefore, we decided that a 10 pixel horizontal search band on either side of the pixel was sufficient to cover any variations in the camera positioning while still limiting the search field quite significantly. 
 
 To find interesting points, we tried two different algorithms: directed variance and corner detection
 
@@ -26,6 +26,6 @@ We ended choosing to use corner detection for finding our points of interest. Co
 Our final point matching algorithm finds a fixed number of corners in both images and then tries to correspond the corners in each image together. The primary logic behind only matching corners to corners is that we can assume that a majority of the corners found in one image will have corresponding corners found in the other image due to the fact that both images are assumed to be taken on identical cameras at the same time while pointed at the same scene.
 
 \subsubsection{Corresponding Areas Around Points}
-To check whether a set of candidate points actually correspond, we take the squared sum of differences of the RGB color distances between the two images for a given ``window'' around each of the candidate points, trying to find the set of candidate points with the smallest difference of color distances, weighted against the distance of the candidate point away from point of interest. We perform this search for all points that are within 20 rows of the point of interest and take the point with the best correspondence. 
+To check whether a set of candidate points actually correspond, we take the sum of squared differences of the RGB color distances between the two images for a given ``window'' around each of the candidate points, trying to find the set of candidate points with the smallest difference of color distances, weighted against the distance of the candidate point away from point of interest. We perform this search for all points that are within 20 rows of the point of interest and take the point with the best correspondence. 
 
 \subsection{Determining Relative Distances}

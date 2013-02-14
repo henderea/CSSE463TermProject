@@ -1,2 +1,12 @@
+Overall, we were satisfied by the results of our algorithm given the time constraints of our project. Given more time, we would've been able to significantly improve our results. 
+
 \subsection{Challenges Encountered}
 \label{conclusion:challenges}
+We encountered several challenges during the course of this project. 
+\subsubsection{Finding Corresponding Points}
+We encountered significant amount of difficulty in finding corresponding matching points. Even with the constraint of being able to limit the number of rows to search, our greedy point matching algorithm still encountered difficulty primarily because we were matching corners to corners -- if the corresponding corner wasn't detected by the corner detector, it will correspond the corner with a random corner. 
+
+One way we could resolve the issue of undetected corresponding corners would be to allow unmatched corners. 
+
+\subsubsection{Optimizing MATLAB Code}
+We had significant problems with optimizing our algorithms for performance. In general, our algorithm implementations are not fast enough to be able to used in real-time. However, given more time, we would be able to optimize our MATLAB code or rewrite our implementation in native C/C++, potentially using OpenCV. With more time, our goal would be to improve the performance enough that we could handle 5-10fps on a multi-core machine. 

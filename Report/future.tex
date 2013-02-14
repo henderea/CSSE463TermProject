@@ -5,4 +5,17 @@ Our current point matching algorithm, while reasonably accurate, could still use
 
 One suggestion that we received during our presentation was the possibility of using motion algorithms to help determine corresponding points between the two images. If we know the amount of motion that a particular object takes, we can search a small region around where we would expect the object to be in the other image to determine corresponding points. Using this in conjunction with our corner-based interesting point detection would allow us to map significantly more points, resulting in more depth data for an image. 
 
-Finally, a way to significantly improve our point matching would be to gather intrinsic camera parameters, either by an explicit camera calibration step or using the \textit{C2MODEL} algorithm suggested in the SRI paper, and to find the Epipolar line in the corresponding image. With the Epipolar line, we would know that the corresponding point would lie somewhere on that line. This would reduce our search from a 2-dimensional search to a simple 1-dimensional search.
+Finally, a way to significantly improve our point matching would be to gather intrinsic camera parameters, either by an explicit camera calibration step or using the \textit{C2MODEL} algorithm suggested in the SRI paper, and to find the epipolar line in the corresponding image. With the epipolar line, we would know that the corresponding point would lie somewhere on that line. This would reduce our search from a 2-dimensional search to a simple 1-dimensional search.
+
+\subsection{Regions of Depth}
+Instead of getting the depth of single points, one potential improvement would be to get the depth of entire planes in the image, such as the face of a box. This would allow us to produce a full depth map of a scene for every point in the scene.
+
+One potential way of implementing this would be to use the anchored point matching algorithm, such as \textit{GMATCH}, suggested in the SRI paper for getting additional point matches around the interest points. In theory, we could perform anchored point matching to get corresponding points for all of the overlapping points within the image. From there, we can use edge detection to determine the boundaries of plane faces and merge those distances into a smooth depth gradient rather than a collection of depths of points. 
+
+With this implemented, our project could be potentially useful for creating 3D models of scenes using just stereoscopic data.
+
+\subsection{Absolute Distances}
+One of the limitations of our current implementation is that we cannot determine absolute distances away from the camera (e.g., saying that point X is 15 feet away from the camera). One way we could potentially get this information would be to calibrate our implementation using known distances (e.g., calibrate the setup by saying that object X is 5 feet away and object Y is 10 feet away) and using that information to determine the field of view angle for the camera. 
+
+One potential limitation of this approach is that some cameras have asymmetrical field of view angles, viewing the image in an oval rather than square. As such, we would need to account for this by taking multiple measurements. Another approach would be to simply use cameras where we know the field of view angles.
+

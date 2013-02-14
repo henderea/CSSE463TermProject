@@ -29,3 +29,6 @@ Our final point matching algorithm finds a fixed number of corners in both image
 To check whether a set of candidate points actually correspond, we take the sum of squared differences of the RGB color distances between the two images for a given ``window'' around each of the candidate points, trying to find the set of candidate points with the smallest difference of color distances, weighted against the distance of the candidate point away from point of interest. We perform this search for all points that are within 20 rows of the point of interest and take the point with the best correspondence. 
 
 \subsection{Determining Relative Distances}
+Lacking information about camera position and focal length, we have no way of determining real-space coordinates in our images. However, we do know that there is a correlation between how far points move in the coordinates of the images and in real-space. From this, we could at least determine the relative depths of pixels based on their movement.
+
+Thus, the calculation for depths between two images $A$ and $B$ is simply the Euclidean distance of the points in $A$ and their corresponding matches in $B$. We showed this depth map by creating a new matrix in the space of $A$, and corresponding these distances with the points of interest found in $A$.

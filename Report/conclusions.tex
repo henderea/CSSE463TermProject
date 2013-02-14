@@ -10,3 +10,9 @@ One way we could resolve the issue of undetected corresponding corners would be 
 
 \subsubsection{Optimizing MATLAB Code}
 We had significant problems with optimizing our algorithms for performance. In general, our algorithm implementations are not fast enough to be able to used in real-time. However, given more time, we would be able to optimize our MATLAB code or rewrite our implementation in native C/C++, potentially using OpenCV. With more time, our goal would be to improve the performance enough that we could handle 5-10fps on a multi-core machine. 
+
+\subsubsection{Varying Accuracy and Camera Limitations}
+In some cases, we found that the accuracy of our algorithm ranged from good to abysmal. This isn't a problem specifically with our implementation, but rather with the general principle of stereoscopic depth mapping. For objects that are far away, their corresponding points could potentially map to the same cell on the sensor. Very small changes in distance could also map to the same cell. This would make stereoscopic depth mapping not suitable for use for 3D modeling or other fields requiring a large degree of accuracy. 
+
+\subsubsection{Unknown Camera Parameters}
+One way that we could've improved our algorithms would be through the use of information about the camera. For instance, we would be able to obtain the actual distances away from the camera if we knew the field of view angle and distance between the stereo cameras. However, most of the images we used did not contain both pieces of information necessary. 

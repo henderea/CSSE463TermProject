@@ -41,3 +41,13 @@ The work discussed in this paper strongly resembled expected subproblems of our 
 
 \subsubsection{Issues}
 Many issues with the depth perception are listed by the author, and had not yet been solved at the time of writing. Of particular note are problems caused by repeated features in images, which can cause issues in determining proper alignment for the stereo images. In addition, the perspective of source images can create issues in properly aligning points without taking into account the distortion of one of the two images. It is also discouraging that this paper was published in 1975, as much of of the 'Future Work' listed have probably been solved by now.
+
+\subsection{Stephens, Mike. Harris, Chris. ``A Combined Corner and Edge Detector.'' Plessey Company, 1988}
+\subsubsection{Summary}
+This paper describes an algorithm for detecting corners and edges in an image by improving on the Moravec corner detection algorithm. Harris/Stephens' algorithm solves several problems in Moravec, including noisy response, missing corners that are not at 45 degree intervals, and responding too readily to edges. 
+
+\subsubsection{Applicability}
+The use of a corner detector in our project provides us with our set of interesting points. These points can later be corresponded. Corner points are ideal for matching, because, by definition, they have a large amount of X and Y direction variance. 
+
+\subsubsection{Issues}
+The primary issues with only using corner detection for our interesting points is that we can miss points that might be reasonably unique enough for matching, but not oriented in such a way that a corner detector would flag that pixel as a corner. Despite this, using the Harris/Stephens' corner detection algorithm provides us with a large number of high-quality points that we can correspond significantly better than the points found using directed variance. 

@@ -12,7 +12,7 @@ Instead of getting the depth of single points, one potential improvement would b
 
 One potential way of implementing this would be to use the anchored point matching algorithm, such as \textit{GMATCH}, suggested in the SRI paper for getting additional point matches around the interest points. In theory, we could perform anchored point matching to get corresponding points for all of the overlapping points within the image. From there, we can use edge detection to determine the boundaries of plane faces and merge those distances into a smooth depth gradient rather than a collection of depths of points. 
 
-With this implemented, our project could be potentially useful for creating 3D models of scenes using just stereoscopic data.
+With this implemented, our project would be one step closer to being able to create 3D models of scenes using just stereoscopic data.
 
 \subsection{Absolute Distances}
 One of the limitations of our current implementation is that we cannot determine absolute distances away from the camera (e.g., saying that point X is 15 feet away from the camera). One way we could potentially get this information would be to calibrate our implementation using known distances (e.g., calibrate the setup by saying that object X is 5 feet away and object Y is 10 feet away) and using that information to determine the field of view angle for the camera. 

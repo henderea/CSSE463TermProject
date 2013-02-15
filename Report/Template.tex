@@ -1,5 +1,5 @@
 \documentclass{article}
-\usepackage{spconf_ICME,amsmath,epsfig,fancyhdr,graphicx}
+\usepackage{spconf_ICME,amsmath,epsfig,fancyhdr,float}
 \setlength{\paperwidth}{215.9mm} \setlength{\hoffset}{-9.7mm}
 \setlength{\oddsidemargin}{0mm} \setlength{\textwidth}{184.3mm}
 \setlength{\columnsep}{6.3mm} \setlength{\marginparsep}{0mm}
@@ -9,12 +9,14 @@
 \setlength{\topskip}{0mm} \setlength{\textheight}{235.2mm}
 \setlength{\footskip}{12.4mm} \setlength{\parindent}{1pc}
 
+
 \ICMEfinalcopy % *** Uncomment this line for the final submission
 
-\def\ICMEPaperID{} % *** Enter the ICME Paper ID here
+\def\ICMEPaperID{****} % *** Enter the ICME Paper ID here
 \def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
 
 \ifICMEfinal\pagestyle{empty}\fi
+
 
 \begin{document}\sloppy
 
@@ -23,13 +25,18 @@
 \address{Rose-Hulman Institute of Technology\\
 Terre Haute, Indiana}
 
+
 \maketitle
 \thispagestyle{fancy} \fancyhead{} \lhead{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 
-\input{abstract}
-
+\begin{abstract}
+There are many ways to implement depth mapping for 3D vision purposes -- the two primary methods being light-based and stereoscopic. We discuss an implementation of automated stereoscopic depth mapping, including automatic unsupervised corresponding point matching using corner detection and window-based matching. 
+\end{abstract}
+\begin{keywords}
+stereoscopic vision,depth mapping, stereo vision
+\end{keywords}
 \section{Introduction}
 \label{sec:intro}
 \input{intro}
@@ -46,17 +53,12 @@ Terre Haute, Indiana}
 \label{sec:Results}
 \input{results}
 
-\section{Conclusion}
-\label{sec:conclusion}
-\input{conclusions}
-
-\section{Challenges Encountered}
-\label{conclusion:challenges}
-\input{challenges}
-
 \section{Future Work}
 \label{sec:future}
 \input{future}
 
+\section{Conclusion}
+\label{sec:conclusion}
+\input{conclusions}
 
 \end{document}
